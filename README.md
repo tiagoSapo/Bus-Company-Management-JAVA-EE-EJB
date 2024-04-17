@@ -27,7 +27,7 @@ This project is a demonstration application for managing a bus company, develope
 3. Configure the MySQL database with the name "is_db".
 4. Start the WildFly server and configure the DataSource for the database.
 5. Import the Maven project into NetBeans or your preferred IDE.
-6. Deploy the IS_Meta2 (backend) and ISWebApplication1 (frontend) projects on the WildFly server.
+6. Deploy the IS_Backend (backend) and ISWebApplication (frontend) projects on the WildFly server.
 7. Access the web application through the browser at localhost:8080/ISWebApplication1.
 
 ## Contribution
