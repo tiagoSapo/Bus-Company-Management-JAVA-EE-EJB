@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Gestão de autocarros - Atualizar dados</title>
+    </h:head>
+    <h:body>
+        <h1 style="font-family: Arial">Atualizar dados da conta</h1>
+        <p:outputLabel value="Para atualizar os dados da conta, preencha os seguintes parâmetros:"/> <br/><br/>
+        
+        <h:form id="user-form">  
+            <p:panelGrid>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold;" value="Nome  "/>  </p:column>
+                    <p:column><p:inputText id="name" value="#{PrincipalController.clientView.name}" required="true"
+                             requiredMessage="O nome é obrigatório"/><br/>  </p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold;" value="Palavra-passe  "/> </p:column>
+                    <p:column ><p:password id="password" value="#{PrincipalController.clientView.password}" required="true"
+                            requiredMessage="A palavra-passe é obrigatória"/><br/></p:column>
+                </p:row>
+            </p:panelGrid>
+            
+            <br/>
+            <p:commandButton id="submit-button" ajax="false" value="Atualizar dados" action="#{PrincipalController.updateAccount()}"
+                    styleClass="ui-button-raised" icon="pi pi-check"
+                    style="background-color: #4CAF50; border: none;" /> 
+            <p:button value="Cancelar" outcome="#{PrincipalController.returnToMainPage()}"
+                    styleClass="ui-button-raised" icon="pi pi-times"  
+                    style="margin-left:10px; background-color: #B03A2E; border: none;"/>
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+        </h:form>  
+        
+    </h:body>
+</html>
+

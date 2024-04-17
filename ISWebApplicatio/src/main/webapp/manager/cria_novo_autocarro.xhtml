@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+          
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Gestão de autocarros - Nova viagem</title>
+    </h:head>
+    <h:body>
+        <h1 style="font-family: Arial">Registar nova Viagem no sistema:</h1>
+        <p:outputLabel>Para registar um novo autocarro, preencha os seguintes parâmetros:</p:outputLabel><br/><br/>
+        <h:form id="user-form">  
+            <p:panelGrid>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold" value="Número da linha  "/>  </p:column>
+                    <p:column><p:inputText value="#{PrincipalController.tripView.lineNumber}" required="true"
+                         requiredMessage="O numero da linha é obrigatório"/><br/></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold" value="Ponto de partida  "/>  </p:column>
+                    <p:column><p:inputText value="#{PrincipalController.tripView.departure}" required="true"
+                         requiredMessage="O ponto de partida é obrigatório"/><br/></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold" value="Ponto de chegada  "/>  </p:column>
+                    <p:column><p:inputText value="#{PrincipalController.tripView.destination}" required="true"
+                         requiredMessage="O ponto de chegada é obrigatório"/><br/></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold" value="Capacidade  "/>  </p:column>
+                    <p:column>
+                        <p:inputNumber id="vertical" minValue="0" maxValue="1000" 
+                                       value="#{PrincipalController.tripView.capacity}" decimalPlaces="0"/>
+                        <br/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold" value="Preço (€)  "/>  </p:column>
+                    <p:column>
+                        <p:inputNumber value="#{PrincipalController.tripView.price}" required="true"
+                         requiredMessage="O preço é obrigatório" symbol=" €"
+                                symbolPosition="s" decimalSeparator="," thousandSeparator=".">
+                        </p:inputNumber>
+                        <br/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold" value="Data de partida  "/>  </p:column>
+                    <p:column>
+                        <p:datePicker id="time" value="#{PrincipalController.tripView.departureTime}" 
+                                      showTime="true" showIcon="true" required="true" 
+                                      requiredMessage="A data de partida é obrigatória"
+                                      monthNavigator="true" yearNavigator="true"/>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+            
+            <br/>
+            <p:commandButton id="submit-button" ajax="false" value="Criar viagem" action="#{PrincipalController.registerNewTrip()}"
+                             styleClass="ui-button-raised" style="background-color: #4CAF50; border: none;" icon="pi pi-check"/> 
+            <p:button value="Cancelar" outcome="#{PrincipalController.returnToMainPage()}"
+                      styleClass="ui-button-raised" icon="pi pi-times"  style="margin-left:10px; background-color: #B03A2E; border: none;"/>
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+        </h:form> 
+        
+    </h:body>
+</html>
+

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Consultar Top 5 clientes</title>
+    </h:head>
+    <h:body>
+        <h1 style="font-family: Arial">Consultar Top 5 clientes</h1>
+        
+        <h:form id="form">
+            
+            <p:outputLabel value="Autocarros: " style="font-weight: bold;"/><br/><br/>
+            <p:dataTable id="trip-table" var="mapa" emptyMessage="Não há registo de clientes" 
+                         value="#{mapa = PrincipalController.top5Clients()}" style="float: bottom;">
+                <p:column headerText ="Nome">       
+                    <p:outputLabel value="#{mapa.key.name}"/>
+                </p:column> 
+                <p:column headerText ="Email">       
+                    <p:outputLabel value="#{mapa.key.email}" style="width: 100px;"/>
+                </p:column> 
+                <p:column headerText ="Saldo (€)">       
+                    <p:outputLabel value="#{mapa.key.wallet}0€"/>
+                </p:column> 
+                <p:column headerText ="Tipo de conta">       
+                    <p:outputLabel value="#{mapa.key.accountType}"/>
+                </p:column> 
+                <p:column headerText ="Número de viagens">       
+                    <p:outputLabel value="#{mapa.value}"/>
+                </p:column>
+            </p:dataTable> 
+        </h:form>
+        
+        <h:form id="footer">
+            <br/><br/> 
+            <p:button value="Regressar à página principal" outcome="#{PrincipalController.returnToMainPage()}"
+                      styleClass="ui-button-raised" icon="pi pi-chevron-left"/>
+        </h:form>
+        
+    </h:body>
+</html>
+

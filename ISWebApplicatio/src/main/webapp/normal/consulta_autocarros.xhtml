@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Gerir e Consultar autocarros</title>
+    </h:head>
+    <h:body>
+        <h1 style="font-family: Arial">Consultar autocarros e comprar bilhetes</h1>
+
+        <h:form id="form1">
+            <p:outputLabel value="Filtrar por data: " style="font-weight: bold;"/><br/><br/>
+            <p:outputLabel value="De "/>
+            
+            <p:datePicker id="date-start" label="Inicio" value="#{start}"
+                          showTime="true" showIcon="true"
+                          monthNavigator="true" yearNavigator="true"/>
+            <p:outputLabel value=" a "/>
+            <p:datePicker id="date-end" label="Fim" value="#{end}"
+                          showTime="true" showIcon="true" 
+                          monthNavigator="true" yearNavigator="true"/>
+            <p:commandButton id="date-search" value="Pesquisar por data"
+                             style="margin-left: 10px; background-color: #0769B1; border: none;"
+                             styleClass="ui-button-raised" icon="pi pi-search"
+                             update="form3" action="#{PrincipalController.listTrips(start, end)}"/>
+            <br/><br/>
+            
+            <p:outputLabel value="Partida "/>
+            <p:inputText value="#{partida}"/>
+            <p:outputLabel value=" Chegada "/>
+            <p:inputText value="#{chegada}"/>
+            <p:commandButton id="location-search" value="Pesquisar por Partida e Chegada"
+                             style="margin-left: 10px; background-color: #0769B1; border: none;"
+                             styleClass="ui-button-raised" icon="pi pi-search"
+                             update="form3" action="#{PrincipalController.listTripsLocation(partida, chegada)}"/>
+            
+            
+        </h:form>
+        
+        <h:form id="form2">
+            <c:set var="spinner" value="0" scope="request" />
+        </h:form>
+        
+            <br/><br/>
+
+        <h:form id="form3">
+
+            <p:outputLabel value="Autocarros: " style="font-weight: bold;"/><br/><br/>
+            <p:dataTable id="trip-table" var="trip" emptyMessage="Não há registo de autocarros para as datas selecionadas" 
+                         value="#{PrincipalController.tripsView}" style="float: bottom;">
+                <p:column headerText ="ID">       
+                    <h:outputText value="#{trip.id}"/>
+                </p:column> 
+                
+                <p:column headerText ="Número da linha">       
+                    <h:outputText value="#{trip.lineNumber}"/>
+                </p:column> 
+                <p:column headerText ="Capacidade">       
+                    <h:outputText value="#{trip.capacity}" style="width: 100px;"/>
+                </p:column> 
+                <p:column headerText ="Partida">       
+                    <h:outputText value="#{trip.departure}"/>
+                </p:column> 
+                <p:column headerText ="Chegada">       
+                    <h:outputText value="#{trip.destination}"/>
+                </p:column> 
+                <p:column headerText ="Data de partida">       
+                    <h:outputText value="#{trip.departureTime}"/>
+                </p:column> 
+                <p:column headerText ="Preço (€)">       
+                    <h:outputText value="#{trip.price}0€"/>
+                </p:column>
+                <p:column headerText ="Comandos">
+                    <p:commandButton value="COMPRAR viagem" update="form3"
+                                     style="background-color: #4CAF50; border: none;" icon="pi pi-shopping-cart" 
+                                     action="#{PrincipalController.buyTickets(trip.id, 1)}"/>
+                </p:column>
+            </p:dataTable>
+            
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+            
+            
+            
+        </h:form>
+        
+        <h:form id="footer">
+            <br/><br/> 
+            <p:button value="Regressar à página principal" outcome="#{PrincipalController.returnToMainPage()}"
+                      styleClass="ui-button-raised" icon="pi pi-chevron-left"/>
+        </h:form>
+        
+   </h:body>
+</html>
+

@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Gerir e Consultar autocarros</title>
+    </h:head>
+    <h:body>
+        <h1 style="font-family: Arial">Gerir e Consultar autocarros</h1>
+
+        <h:form id="form1">
+            <p:outputLabel value="Filtrar por data: " style="font-weight: bold;"/><br/><br/>
+            <p:outputLabel value="De "/>
+            
+            <p:datePicker id="date-start" label="Inicio" value="#{start}"
+                          showTime="true" showIcon="true"
+                          monthNavigator="true" yearNavigator="true">
+                </p:datePicker>
+            <p:outputLabel value=" a "/>
+            <p:datePicker id="date-end" label="Fim" value="#{end}"
+                          showTime="true" showIcon="true" 
+                          monthNavigator="true" yearNavigator="true">
+                </p:datePicker>
+            
+            <p:commandButton id="someId" value="Pesquisar"
+                             style="margin-left: 10px; background-color: #0769B1; border: none;"
+                             styleClass="ui-button-raised" icon="pi pi-search"
+                             update="form3" action="#{PrincipalController.listTrips(start, end)}"/>
+        </h:form>
+        
+            <br/><br/>
+
+        <h:form id="form3">
+
+            <p:outputLabel value="Autocarros: " style="font-weight: bold;"/><br/><br/>
+            <p:dataTable id="trip-table" var="trip" emptyMessage="Não há registo de autocarros" 
+                         value="#{PrincipalController.tripsView}" style="float: bottom;">
+                <p:column headerText ="ID">       
+                    <p:outputLabel value="#{trip.id}"/>
+                </p:column> 
+                
+                <p:column headerText ="Número da linha">       
+                    <p:outputLabel value="#{trip.lineNumber}"/>
+                </p:column> 
+                <p:column headerText ="Capacidade">       
+                    <p:outputLabel value="#{trip.capacity}" style="width: 100px;"/>
+                </p:column> 
+                <p:column headerText ="Partida">       
+                    <p:outputLabel value="#{trip.departure}"/>
+                </p:column> 
+                <p:column headerText ="Chegada">       
+                    <p:outputLabel value="#{trip.destination}"/>
+                </p:column> 
+                <p:column headerText ="Data de partida">       
+                    <p:outputLabel value="#{trip.departureTime}"/>
+                </p:column> 
+                <p:column headerText ="Preço (€)">       
+                    <p:outputLabel value="#{trip.price}0€"/>
+                </p:column>
+                <p:column headerText ="Passageiros (nome e número bilhetes)">       
+                    <p:outputLabel value="#{trip.clients}"/>
+                </p:column>
+                <p:column headerText ="Comandos">
+                    <p:commandButton value="APAGAR Viagem" update="form3"
+                                     style="background-color: #B03A2E; border: none;" icon="pi pi-trash" 
+                                     action="#{PrincipalController.deleteTrip(trip.id, start, end)}"/>
+                </p:column>
+            </p:dataTable>
+            
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+            </p:messages>    
+        </h:form>
+        
+        <h:form id="footer">
+            <br/><br/> 
+            <p:button value="Regressar à página principal" outcome="#{PrincipalController.returnToMainPage()}"
+                      styleClass="ui-button-raised" icon="pi pi-chevron-left"/>
+        </h:form>
+        
+   </h:body>
+</html>
+

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Gestão de autocarros - Menu</title>
+    </h:head>
+    <h:body>
+        <h1 style="font-family: Arial">Aplicação Web - Menu</h1>
+        
+        <h:form id="formprincipal">
+            <p:outputLabel>#{PrincipalController.welcomeMsg()}<b>'#{PrincipalController.sessionClient.name}'</b></p:outputLabel>
+            <p:commandButton value="Terminar sessão" action="#{PrincipalController.sair()}"
+                             styleClass="ui-button-raised ui-button-secondary"
+                             icon="pi pi-user" style="margin-left: 10px;"/><br/>
+        </h:form>
+
+        
+        <br/>
+        <p:outputLabel value="Minha Conta:" style="font-weight: bold;"/><br/>
+        <p:link value="CONSULTAR os dados da minha conta" outcome="/normal/dados_da_conta"/><br/>
+        <p:link value="ATUALIZAR os dados da minha conta" outcome="/normal/dados_atualizar"/><br/>
+        <p:link value="CARREGAR a minha carteira" outcome="/normal/carrega_carteira"/><br/>
+        <p:link value="APAGAR minha conta" outcome="/normal/apaga_conta"/><br/>
+        
+        <br/>
+        <p:outputLabel value="Autocarros:" style="font-weight: bold;"/><br/>
+        <p:link value="CONSULTAR autocarros e COMPRAR bilhetes" outcome="/normal/consulta_autocarros"/><br/>
+        <p:link value="CONSULTAR os meus bilhetes" outcome="/normal/consulta_bilhetes"/><br/>
+        
+        <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+        </p:messages>
+        
+    </h:body>
+</html>
+

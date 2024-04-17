@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Consultar conta</title>
+    </h:head>
+    <h:body>
+        <h1 style="font-family: Arial">Dados da conta:</h1>    
+        <h:form id="user-form">  
+            <p:panelGrid>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold" value="Nome  "/>  </p:column>
+                    <p:column><p:outputLabel value="#{PrincipalController.sessionClient.name}"/><br/></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold" value="Email  "/>  </p:column>
+                    <p:column><p:outputLabel value="#{PrincipalController.sessionClient.email}"/><br/></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold" value="Saldo  "/>  </p:column>
+                    <p:column><p:outputLabel value="#{PrincipalController.sessionClient.wallet}0€"/><br/></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel style="font-weight: bold" value="Tipo de conta  "/>  </p:column>
+                    <p:column><p:outputLabel><i>#{PrincipalController.sessionClient.accountType}</i></p:outputLabel><br/></p:column>
+                </p:row>
+            </p:panelGrid>
+            
+            <br/>
+            <p:button value="Regressar à página principal" outcome="#{PrincipalController.returnToMainPage()}"
+                      styleClass="ui-button-raised" icon="pi pi-chevron-left"/>
+            
+        </h:form>    
+    </h:body>
+</html>
+
